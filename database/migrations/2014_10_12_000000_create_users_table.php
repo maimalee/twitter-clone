@@ -28,6 +28,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->softDeletes()->nullable();
+            $table->string('api_token', 500)->nullable();
+            $table->boolean('is_verified',)->default(0)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
