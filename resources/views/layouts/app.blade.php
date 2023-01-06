@@ -16,15 +16,20 @@
     <!-- Layout styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico"/>
 </head>
 <body>
+
+
+
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
+        @if(Auth::check())
         <nav class="sidebar sidebar-offcanvas" id="sidebar" style="border-right: 1px solid rebeccapurple">
             <ul class="nav">
                 <li class="nav-item nav-profile">
@@ -48,15 +53,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                       aria-controls="ui-basic">
                         <span class="menu-title">Basic UI Elements</span>
                         <i class="menu-arrow"></i>
                         <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                            <li class="nav-item"><a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="pages/ui-features/typography.html">Typography</a></li>
                         </ul>
                     </div>
                 </li>
@@ -85,18 +93,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false"
+                       aria-controls="general-pages">
                         <span class="menu-title">Sample Pages</span>
                         <i class="menu-arrow"></i>
                         <i class="mdi mdi-medical-bag menu-icon"></i>
                     </a>
                     <div class="collapse" id="general-pages">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+                            <li class="nav-item"><a class="nav-link" href="pages/samples/blank-page.html"> Blank
+                                    Page </a></li>
+                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                            <li class="nav-item"><a class="nav-link" href="pages/samples/register.html"> Register </a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+                            <li class="nav-item"><a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
                         </ul>
                     </div>
                 </li>
@@ -123,14 +134,16 @@
         <!-- partial -->
         <div class="main-panel">
             <div class="">
-            @yield('content')
+                @endif
+                @yield('content')
             </div>
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
             <footer class="footer">
                 <div class="container-fluid d-flex justify-content-between">
                     <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
-                    <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+                    <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a
+                            href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
                 </div>
             </footer>
             <!-- partial -->
