@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,10 @@ Route::get('/', [PostController::class,'index'])
     ->name('home');
 
 Auth::routes();
+Route::prefix('users')
+    ->middleware('auth')
+    ->name('users.')
+    ->group(function (){
+        Route::get('/{id}/follow', [UserController::class, 'follow'])->name('follow');
+       Route::get('/{id}/signout', [UserController::class, 'destroy'])->name('logout');
+    });

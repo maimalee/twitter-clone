@@ -177,15 +177,15 @@
                                         <img src="/assets/images/th.webp" alt="" class="rounded-circle" style="width: 60px; height: 60px; margin-left: 0px">
                                     @endif
                                 </div>
-                                <div class="col-md-7 mt-2">
+                                <div class="col-md-6 mt-2">
                                     {{$user->first_name}}
                                     {{$user->last_name}} <br>
                                     @ {{$user->username}}
                                 </div>
-                                <div class="col-md-3 mt-2">
-                                    <button class="btn btn-primary btn-sm">
+                                <div class="col-md-4 mt-2">
+                                    <a href="{{Route('users.follow', $user->user_id)}}" class="btn btn-primary">
                                         Follow
-                                    </button>
+                                    </a>
                                 </div>
                           @endforeach
                             <div class="mt-3">
