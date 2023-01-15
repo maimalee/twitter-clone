@@ -170,5 +170,18 @@
 <script src="assets/js/todolist.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 <!-- End custom js for this page -->
+
+@auth
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'Authorization' : `Bearer {{ \auth()->user()['api_token'] }}`
+            }
+        });
+        $.get(`/api/test`)
+    </script>
+@endauth
+
+@yield('script')
 </body>
 </html>
