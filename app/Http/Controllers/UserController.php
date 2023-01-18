@@ -20,6 +20,7 @@ class UserController extends Controller
             Followers::query()->create([
                 'user_id' => Auth::id(),
                 'follower_id' => $id,
+                'status' => 'follow',
             ]);
             return redirect()->back();
         }

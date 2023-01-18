@@ -113,7 +113,6 @@
                 </li>
                 <li class="nav-item sidebar-actions">
                     <hr>
-
                     <a href="{{Route('users.logout', Auth()->user())}}" class="btn btn-primary">
                             Logout
                     </a>
