@@ -119,8 +119,9 @@
                 </li>
             </ul>
         </nav>
+         
 
-        <!-- partial -->
+            <!-- partial -->
         <div class="main-panel">
             <div class="">
                 @endif
