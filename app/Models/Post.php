@@ -14,6 +14,8 @@ class Post extends Model
         'post_image',
         'post_video',
         'tag',
+        'parent_id',
+        'post_type',
     ];
 
     protected $primaryKey = 'post_id';

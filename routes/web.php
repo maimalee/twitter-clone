@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('layouts.app');
 //});
 
-Route::get('/', [PostController::class,'index'])
+Route::get('/', [PostController::class, 'index'])
     ->middleware('auth')
     ->name('home');
 
@@ -28,7 +27,14 @@ Auth::routes();
 Route::prefix('users')
     ->middleware('auth')
     ->name('users.')
-    ->group(function (){
+    ->group(function () {
         Route::get('/{id}/follow', [UserController::class, 'follow'])->name('follow');
-       Route::get('/{id}/signout', [UserController::class, 'destroy'])->name('logout');
+        Route::get('/{id}/signout', [UserController::class, 'destroy'])->name('logout');
+    });
+
+Route::prefix('post')
+    ->middleware('auth')
+    ->name('post.')
+    ->group(function (){
+       Route::get('/{id}/retweet', [PostController::class, 'retweet'])->name('retweet');
     });
