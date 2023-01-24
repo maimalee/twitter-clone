@@ -19,19 +19,19 @@
                         @endif
                     </div>
                     <div class="col-md-10">
-                        <form action="" method="post" multiple="multiple">
+                        <form action="{{Route('post.create')}}" method="GET" multiple="multiple">
                             @csrf
                             {{$errors}}
 
                             <div class="form-group">
-                                <textarea name="" id="tweet-form" cols="30" rows="10" class="form-control">
+                                <textarea name="post_body" id="tweet-form" cols="30" rows="10" class="form-control">
                                 </textarea>
                                 <hr>
                             </div>
 
                             <div class="text-end">
                                 <button class="btn btn-primary btn-sm">
-                                    <i class="fa fa-plus"></i>
+                                    <i class="fas fa-plus"></i>
                                     Tweet
                                 </button>
                             </div>
@@ -66,6 +66,19 @@
                         @ {{$post->uname}}
                         <div class="mt-4">
                             {{$post->post_body}}
+                            @if($post->parent_id != null)
+                                <div class="row">
+                                    <div class="col-md-1">
+
+                                    </div>
+
+                                    <div class="col-md-6 mt-3">
+                                        <span class="p-3" style="border: 1px solid black;border-radius: 3px">
+                                            {{$post->parent_id}}
+                                        </span>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         <!-- Post Footer-->
 
@@ -99,15 +112,21 @@
 
 
                         <div id="showOptions-{{$post->post_id}}" style="display: none">
-                            <div class="mt-3">
-                                <form action="" method="POST">
-                                    <a href="{{Route('post.retweet', $post->post_id)}}" class="btn btn-primary">
-                                        Retweet
-                                    </a>
-                                </form>
-                                <a href="" data-toggle="modal"  class="btn btn-primary mt-2" data-target="#reply-modal-{{$post->post_id}}">
-                                    Quote Tweet
-                                </a>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mt-">
+                                            <form action="" method="POST">
+                                                <a href="{{Route('post.retweet', $post->post_id)}}" class="btn btn-primary">
+                                                    Retweet
+                                                </a>
+                                            </form>
+                                            <a href="" data-toggle="modal"  class="btn btn-primary mt-2" data-target="#reply-modal-{{$post->post_id}}">
+                                                Quote Tweet
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- quote tweet modal -->
                             <div class="modal fade" id="reply-modal-{{$post->post_id}}" tabindex="-1" role="dialog"
@@ -121,15 +140,46 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="" method="post" id="reply_form">
+                                        <form  action="{{Route('post.quoteTweet', $post->post_id)}}" method="GET" id="reply_form">
                                             <div class="modal-body">
                                                 @csrf
                                                 {{$errors}}
 
-                                                <div class="form-group">
-                                                    <textarea name="reply_content" id="" cols="30" rows="10"
-                                                      class="form-control">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        @if(Auth::user()['profile'])
+                                                            <img src="/assets/images/th.webp" class="rounded-circle" alt="anas"
+                                                                 style="width: 60px; height: 60px; margin-left: 3px">
+                                                        @else
+                                                            <img src="/assets/images/th.webp" alt="" class="rounded-circle"
+                                                                 style="width: 60px; height: 60px; margin-left: 8px">
+                                                        @endif</div>
+
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                    <textarea name="post_body" id="quote-tweet-form" cols="30" rows="10"
+                                                              class="textarea-custom" style="border: hidden">
                                                     </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mt-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            @if(Auth::user()['profile'])
+                                                                <img src="/assets/images/th.webp" class="rounded-circle" alt="anas"
+                                                                     style="width: 60px; height: 60px; margin-left: 3px"> {{$post->uname}}
+                                                            @else
+                                                                <img src="/assets/images/th.webp" alt="" class="rounded-circle"
+                                                                     style="width: 60px; height: 60px; margin-left: 8px"> {{$post->uname}}
+                                                            @endif
+                                                                <br>
+                                                            {{$post->post_body}}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-secondary" data-dismiss="modal">Close
@@ -294,3 +344,17 @@
 
     </script>
 @endsection
+<style type="text/css">
+    #quote-tweet-form{
+        border: hidden;
+        border: .2rem solid #040460;
+        resize: vertical; /* control in which direction textarea can be resized */
+
+    }
+    #reply_form {
+        display: flex;
+        flex-direction: column;
+        max-width: 1000px;
+    }
+
+</style>

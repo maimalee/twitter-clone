@@ -36,5 +36,7 @@ Route::prefix('post')
     ->middleware('auth')
     ->name('post.')
     ->group(function (){
+        Route::get('/create', [PostController::class, 'create'])->name('create');
        Route::get('/{id}/retweet', [PostController::class, 'retweet'])->name('retweet');
+       Route::get('/{id}/quoteTweet', [PostController::class, 'quoteTweet'])->name('quoteTweet');
     });

@@ -18,9 +18,16 @@ class PostController extends Controller
         $posts = Post::query()
             ->select(['posts.*', 'users.first_name as fname', 'users.username as uname'])
             ->join('users', 'users.user_id', 'posts.user_id')
-            ->where('users.role', '!=', 'admin')
+            ->where('users.role', 'user')
+            ->orWhere('post_type', 'retweet')
+            ->orWhere('post_type', 'tweet')
+            ->orWhere('post_type', 'quoteTweet')
+            ->orWhere('post_type', 'comment')
+            ->orWhere('post_type', 'reply')
             ->where('posts.user_id', '!=', Auth::id())
+            ->orderByDesc('post_id')
             ->get();
+
 
         return view('home',[
             'posts' => $posts,
@@ -28,6 +35,18 @@ class PostController extends Controller
         ]);
     }
 
+    public function create(Request $request)
+    {
+        $data = $request->validate([
+            'post_body' => ['required'],
+        ]);
+        $post = Post::query()->create([
+            'user_id' => Auth::id(),
+            'post_type' => 'tweet',
+            'post_body' => $data['post_body'],
+        ]);
+        return redirect()->back();
+    }
     public function retweet($id)
     {
         $data = Post::query()->find($id);
