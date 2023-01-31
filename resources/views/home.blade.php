@@ -24,15 +24,16 @@
                             {{$errors}}
 
                             <div class="form-group">
-                                <textarea name="post_body" id="tweet-form" cols="30" rows="10" class="form-control">
+                                <textarea name="post_body" id="tweet-form"  cols="30" rows="10" class="form-control">
+{{--                                     <?php echo htmlspecialchars($profile['bio']); ?>--}}
                                 </textarea>
                                 <hr>
                             </div>
 
                             <div class="text-end">
-                                <button class="btn btn-primary btn-sm">
+                                <button class="btn btn-primary btn-sm" id="tweetBtn" disabled>
                                     <i class="fas fa-plus"></i>
-                                    Tweet
+                                    Tweetee
                                 </button>
                             </div>
                         </form>
@@ -341,6 +342,74 @@
             const addLinks = document.getElementById(`showOptions-${$option}`);
             addLinks.style.display = 'block';
         })
+
+        // (function(){
+        //     $('#tweet-form').keyup(function(){
+        //         var empty = false;
+        //         $('#tweet-form').each(function(){
+        //             if($(this).val()== ''){
+        //                 empty = true;
+        //             }
+        //         });
+        //
+        //         if(empty){
+        //             $('#tweet').attr('disabled', 'disabled');
+        //         }
+        //         else{
+        //             $('tweet').removeAttribute('disabled');
+        //         }
+        //     });
+        // })
+
+        // document.querySelector("form").addEventListener("input", function (event) {
+        //     var form = event.target.form;
+        //     var filled = [].slice.call(form.elements).map(function (element) {
+        //         return element.value;
+        //     }).every(function (value) {
+        //         return value;
+        //     });
+        //     form.elements.tweet.disabled = !filled;
+        // });
+
+
+        // document.getElementById('tweet-form').addEventListener("textarea", checkForm);
+        // function checkForm() {
+        //     const tweet = document.getElementById('tweet-form').value;
+        //     const tweetBtn = document.getElementById('tweetBtn');
+        //
+        //     if (tweet){
+        //         tweetBtn.disabled = false;
+        //     }
+        //     else{
+        //         tweetBtn.disabled = true;
+        //     }
+        // }
+
+        // window.onload = function () {
+        //     document.getElementById("tweet-form").onkeyup = checkWordCount;
+        //     checkWordCount();
+        // };
+        //
+        // function checkWordCount() {
+        //     if (document.getElementById("tweet-form").value === "") {
+        //         document.getElementById("tweetBtn").disabled = true;
+        //     } else {
+        //         document.getElementById("tweetBtn").disabled = false;
+        //     }
+        // }
+
+        window.onload = function (){
+            const textarea = document.getElementById("tweet-form");
+            const submitButton = document.getElementById("tweetBtn");
+
+            textarea.addEventListener("input", function() {
+                if (textarea.value.length > 0) {
+                    submitButton.removeAttribute("disabled");
+                } else {
+                    submitButton.setAttribute("disabled", "true");
+                }
+            });
+        }
 
     </script>
 @endsection
