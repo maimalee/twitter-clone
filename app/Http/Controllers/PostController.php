@@ -15,6 +15,9 @@ class PostController extends Controller
             ->where('user_id', '!=', Auth::id())
             ->inRandomOrder()->limit(5)
             ->get();
+
+
+
         $posts = Post::query()
             ->select(['posts.*', 'users.first_name as fname', 'users.username as uname'])
             ->join('users', 'users.user_id', 'posts.user_id')

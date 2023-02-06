@@ -18,7 +18,8 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => mt_rand(1,10),
-            'post_body' => implode(',', $this->faker->sentences(5)),
+//            'post_body' => implode(',', $this->faker->sentences(5)),
+            'post_body' => $this->faker->realText(200),
 
         ];
     }

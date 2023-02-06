@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +40,11 @@ Route::prefix('post')
         Route::get('/create', [PostController::class, 'create'])->name('create');
        Route::get('/{id}/retweet', [PostController::class, 'retweet'])->name('retweet');
        Route::get('/{id}/quoteTweet', [PostController::class, 'quoteTweet'])->name('quoteTweet');
+    });
+
+Route::prefix('profile')
+    ->middleware('auth')
+    ->name('profile.')
+    ->group(function (){
+       Route::get('/', [ProfileController::class, 'index'])->name('index');
     });

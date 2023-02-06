@@ -20,7 +20,7 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico"/>
+    <link rel="shortcut icon" class="rounded-circle" href="assets/favicon/download.png" >
 </head>
 <body>
 
@@ -47,70 +47,40 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                        <span class="menu-title">Dashboard</span>
-                        <i class="mdi mdi-home menu-icon"></i>
+                    <a class="nav-link" href="">
+                        <i class="fa fa-home col-sm-3"></i>
+                        Home
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                       aria-controls="ui-basic">
-                        <span class="menu-title">Basic UI Elements</span>
-                        <i class="menu-arrow"></i>
-                        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                    <a class="nav-link" href="">
+                        <i class="fa fa-bell col-sm-3"></i>
+                        Notifications
                     </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="pages/ui-features/typography.html">Typography</a></li>
-                        </ul>
-                    </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/icons/mdi.html">
-                        <span class="menu-title">Icons</span>
-                        <i class="mdi mdi-contacts menu-icon"></i>
+                    <a class="nav-link" href="">
+                        <i class="fa fa-inbox col-sm-3"></i>
+                        Message
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/forms/basic_elements.html">
-                        <span class="menu-title">Forms</span>
-                        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                    <a class="nav-link" href="{{Route('profile.index')}}">
+                        <i class="fa fa-user col-sm-3"></i>
+                        Profile
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/charts/chartjs.html">
-                        <span class="menu-title">Charts</span>
-                        <i class="mdi mdi-chart-bar menu-icon"></i>
+                    <a class="nav-link" href="">
+                        <i class="fa fa-circle col-sm-3"></i>
+                        More
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/tables/basic-table.html">
-                        <span class="menu-title">Tables</span>
-                        <i class="mdi mdi-table-large menu-icon"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false"
-                       aria-controls="general-pages">
-                        <span class="menu-title">Sample Pages</span>
-                        <i class="menu-arrow"></i>
-                        <i class="mdi mdi-medical-bag menu-icon"></i>
-                    </a>
-                    <div class="collapse" id="general-pages">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/blank-page.html"> Blank
-                                    Page </a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/register.html"> Register </a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                        </ul>
-                    </div>
-                </li>
+
                 <li class="nav-item sidebar-actions">
                     <hr>
                     <a href="{{Route('users.logout', Auth()->user())}}" class="btn btn-primary">

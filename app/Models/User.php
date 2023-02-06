@@ -52,6 +52,10 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public static function whereDoesntHave(string $string, \Closure $param)
+    {
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

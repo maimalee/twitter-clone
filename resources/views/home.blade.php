@@ -17,24 +17,47 @@
                             <img src="/assets/images/th.webp" alt="" class="rounded-circle"
                                  style="width: 60px; height: 60px; margin-left: 8px">
                         @endif
+
+                    </div>
+
+                    <div class="col-md-3 mt-2">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle" type="button" id="tweet-option" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                Everyone
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Everyone</a>
+                                <a class="dropdown-item" href="#">Only</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+
                     </div>
                     <div class="col-md-10">
                         <form action="{{Route('post.create')}}" method="GET" multiple="multiple">
                             @csrf
                             {{$errors}}
 
-                            <div class="form-group">
-                                <textarea name="post_body" id="tweet-form"  cols="30" rows="10" class="form-control">
-{{--                                     <?php echo htmlspecialchars($profile['bio']); ?>--}}
+                            <div class="form-group mt-5" >
+                                <textarea name="post_body" id="tweet-form"  cols="60"  class="form-cotrol" onclick="tweet()">
+
                                 </textarea>
                                 <hr>
                             </div>
 
-                            <div class="text-end">
-                                <button class="btn btn-primary btn-sm" id="tweetBtn" disabled>
-                                    <i class="fas fa-plus"></i>
-                                    Tweetee
-                                </button>
+                            <div class="row">
+                                <div class="col-md-7 ">
+e
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-primary btn-sm" id="tweetBtn" disabled>
+                                        <i class="fas fa-plus"></i>
+                                        Tweetee
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -166,6 +189,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" data-dismiss="modal">Close
+                                                    </button>
+                                                    <button onclick="form_submit()" class="btn btn-primary">
+                                                        Send
+                                                    </button>
+                                                </div>
 
                                                 <div class="mt-3">
                                                     <div class="card">
@@ -181,13 +211,6 @@
                                                             {{$post->post_body}}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" data-dismiss="modal">Close
-                                                    </button>
-                                                    <button onclick="form_submit()" class="btn btn-primary">
-                                                        Send
-                                                    </button>
                                                 </div>
 
 
@@ -331,6 +354,21 @@
 
 @section('script')
     <script type="text/javascript">
+
+        function tweet() {
+            $("#tweet-form").focus().prop("selectionStart", 0).prop("selectionEnd", 0);
+            const textarea = document.getElementById("tweet-form");
+            const submitButton = document.getElementById("tweetBtn");
+
+            textarea.addEventListener("input", function() {
+                if (textarea.value.length > 0) {
+                    submitButton.removeAttribute("disabled");
+                } else {
+                    submitButton.setAttribute("disabled", "true");
+                }
+            });
+        }
+
         function form_submit() {
             document.getElementById("reply_form").submit();
         }
@@ -343,73 +381,6 @@
             addLinks.style.display = 'block';
         })
 
-        // (function(){
-        //     $('#tweet-form').keyup(function(){
-        //         var empty = false;
-        //         $('#tweet-form').each(function(){
-        //             if($(this).val()== ''){
-        //                 empty = true;
-        //             }
-        //         });
-        //
-        //         if(empty){
-        //             $('#tweet').attr('disabled', 'disabled');
-        //         }
-        //         else{
-        //             $('tweet').removeAttribute('disabled');
-        //         }
-        //     });
-        // })
-
-        // document.querySelector("form").addEventListener("input", function (event) {
-        //     var form = event.target.form;
-        //     var filled = [].slice.call(form.elements).map(function (element) {
-        //         return element.value;
-        //     }).every(function (value) {
-        //         return value;
-        //     });
-        //     form.elements.tweet.disabled = !filled;
-        // });
-
-
-        // document.getElementById('tweet-form').addEventListener("textarea", checkForm);
-        // function checkForm() {
-        //     const tweet = document.getElementById('tweet-form').value;
-        //     const tweetBtn = document.getElementById('tweetBtn');
-        //
-        //     if (tweet){
-        //         tweetBtn.disabled = false;
-        //     }
-        //     else{
-        //         tweetBtn.disabled = true;
-        //     }
-        // }
-
-        // window.onload = function () {
-        //     document.getElementById("tweet-form").onkeyup = checkWordCount;
-        //     checkWordCount();
-        // };
-        //
-        // function checkWordCount() {
-        //     if (document.getElementById("tweet-form").value === "") {
-        //         document.getElementById("tweetBtn").disabled = true;
-        //     } else {
-        //         document.getElementById("tweetBtn").disabled = false;
-        //     }
-        // }
-
-        window.onload = function (){
-            const textarea = document.getElementById("tweet-form");
-            const submitButton = document.getElementById("tweetBtn");
-
-            textarea.addEventListener("input", function() {
-                if (textarea.value.length > 0) {
-                    submitButton.removeAttribute("disabled");
-                } else {
-                    submitButton.setAttribute("disabled", "true");
-                }
-            });
-        }
 
     </script>
 @endsection
@@ -424,6 +395,12 @@
         display: flex;
         flex-direction: column;
         max-width: 1000px;
+    }
+    #tweet-form {
+        border: none;
+    }
+    #tweet-form:focus {
+        border-bottom: 2px solid black;
     }
 
 </style>
