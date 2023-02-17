@@ -90,19 +90,19 @@ e
                         @ {{$post->uname}}
                         <div class="mt-4">
                             {{$post->post_body}}
-                            @if($post->parent_id != null)
+                            @foreach($post['top_comments'] as $comment)
                                 <div class="row">
                                     <div class="col-md-1">
 
                                     </div>
 
                                     <div class="col-md-6 mt-3">
-                                        <span class="p-3" style="border: 1px solid black;border-radius: 3px">
-                                            {{$post->parent_id}}
+                                        <span class="p-3">
+                                            {{$comment->post_body}}
                                         </span>
                                     </div>
                                 </div>
-                            @endif
+                            @endforeach
                         </div>
                         <!-- Post Footer-->
 

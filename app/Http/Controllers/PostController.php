@@ -4,33 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Repositories\PostRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function __construct(
+        protected readonly PostRepository $repository,
+    )
+    {
+    }
+
+    public function index(): Factory|View|Application
     {
         $users = User::query()
             ->where('user_id', '!=', Auth::id())
             ->inRandomOrder()->limit(5)
             ->get();
 
-
-
-        $posts = Post::query()
-            ->select(['posts.*', 'users.first_name as fname', 'users.username as uname'])
-            ->join('users', 'users.user_id', 'posts.user_id')
-            ->where('users.role', 'user')
-            ->orWhere('post_type', 'retweet')
-            ->orWhere('post_type', 'tweet')
-            ->orWhere('post_type', 'quoteTweet')
-            ->orWhere('post_type', 'comment')
-            ->orWhere('post_type', 'reply')
-            ->where('posts.user_id', '!=', Auth::id())
-            ->orderByDesc('post_id')
-            ->get();
-
+        $posts = $this->repository->all();
+        foreach ($posts as $post) {
+            $post['top_comments'] = $this->repository->getComments(
+                postId: $post['post_id'],
+                limit: 3
+            );
+        }
 
         return view('home',[
             'posts' => $posts,
@@ -73,7 +75,7 @@ class PostController extends Controller
         ]);
         $post = Post::query()->create([
             'user_id' => Auth::id(),
-            'post_type' => 'quoteTweet',
+            'post_type' => 'reply',
             'parent_id'=> $id,
             'post_body' => $quoteTweet['post_body'],
         ]);
