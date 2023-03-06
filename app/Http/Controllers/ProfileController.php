@@ -28,4 +28,13 @@ class ProfileController extends Controller
             'totalPost' => $totalPost,
         ]);
    }
+
+    public function edit()
+    {
+        $id = Auth::id();
+        $user = User::query()->find($id);
+        return view('profile.edit',[
+            'user' => $user,
+        ]);
+   }
 }

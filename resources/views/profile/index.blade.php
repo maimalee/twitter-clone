@@ -28,16 +28,65 @@
                         <img src="/assets/images/th.webp" class="rounded-circle" alt="anas"
                              style="width: 120px; height: 120px; margin-left: 8px; margin-top: 130px">
                     @else
-                        <img src="/assets/images/th.webp" alt="" class="rounded-circle"
-                             style="width: 120px; height: 120px; margin-left: 8px; margin-top: 130px">
+                        <a href="{{Route('profile.edit')}}" class="">
+                            <img src="/assets/images/th.webp" alt="" class="rounded-circle"
+                                 style="width: 120px; height: 120px; margin-left: 8px; margin-top: 130px">
+                        </a>
                     @endif
                 </div>
 
                 <div class="text-end" style="margin-top: -20px">
-                    <a href="" class="btn btn-dark">
+                    {{--                    <a href="{{Route('profile.edit')}}" class="btn btn-dark">--}}
+                    {{--                        Edit Profile--}}
+                    {{--                    </a>--}}
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
                         Edit Profile
-                    </a>
+                    </button>
                 </div>
+                <!-- Button trigger modal -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content col-md-12 bg-dark">
+                            <form action="">
+                                @csrf
+                                {{$errors}}
+                                <div class="modal-header">
+                                    <a href="{{Route('profile.index')}}" class="">
+                                        <i class="fa fa-close">
+                                            Cancel
+                                        </i>
+                                    </a>
+
+                                    <div class="text-end">
+                                        <button class="btn btn-dark">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+
+                                    <label for="name" class="">First Name:</label>
+                                    <input type="text" class="form-control" value="{{old('first_name',$user->first_name)}}">
+
+                                    <label for="name" class="">Last Name:</label>
+                                    <input type="text" class="form-control"
+                                           value="{{old('last_name',$user->last_name)}}">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- main part -->
                 <ul class="container-fluid">
                     {{$user->first_name }} {{$user->last_name}} <br>

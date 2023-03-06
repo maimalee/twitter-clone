@@ -184,15 +184,15 @@ e
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                     <textarea name="post_body" id="quote-tweet-form" cols="30" rows="10"
-                                                              class="textarea-custom" style="border: hidden">
+                                                              class="textarea-custom" style="border: hidden" onclick="quote()">
                                                     </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-secondary" data-dismiss="modal">Close
+                                                    <button class="btn btn-secondary" data-dismiss="modal" >Close
                                                     </button>
-                                                    <button onclick="form_submit()" class="btn btn-primary">
+                                                    <button  class="btn btn-primary" id="quotebtn" disabled>
                                                         Send
                                                     </button>
                                                 </div>
@@ -212,7 +212,6 @@ e
                                                         </div>
                                                     </div>
                                                 </div>
-
 
                                             </div>
                                         </form>
@@ -356,15 +355,31 @@ e
     <script type="text/javascript">
 
         function tweet() {
-            $("#tweet-form").focus().prop("selectionStart", 0).prop("selectionEnd", 0);
+            // $("#tweet-form").focus().prop("selectionStart", 0).prop("selectionEnd", 0);
             const textarea = document.getElementById("tweet-form");
             const submitButton = document.getElementById("tweetBtn");
 
             textarea.addEventListener("input", function() {
-                if (textarea.value.length > 0) {
+                if (textarea.value.trim().length > 0) {
                     submitButton.removeAttribute("disabled");
                 } else {
                     submitButton.setAttribute("disabled", "true");
+                }
+            });
+        }
+
+        function quote(){
+            $("#reply-form").focus().prop("selectionStart", 0).prop("selectionEnd", 0);
+
+            const textarea = document.getElementById("quote-tweet-form");
+            const quotebtn = document.getElementById("quotebtn");
+
+            textarea.addEventListener("input", function (){
+                if(textarea.value.trim().length > 0){
+                    quotebtn.removeAttribute("disabled");
+                }
+                else {
+                    quotebtn.setAttribute("disabled", "true");
                 }
             });
         }
